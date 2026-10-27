@@ -1,0 +1,92 @@
+### 1. Verificar que la API está funcionando
+GET http://localhost:8080/api/estado
+Accept: application/json
+
+### 2. Listar metas de ahorro
+GET http://localhost:8080/api/metas
+Accept: application/json
+
+### 3. Crear una meta de ahorro (guarda automáticamente su ID)
+POST http://localhost:8080/api/metas
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombre": "Comprar una moto",
+  "objetivo": 2500000,
+  "ahorrado": 0,
+  "descripcion": "Meta de ahorro personal",
+  "fechaObjetivo": "2027-06-30"
+}
+> {% client.global.set("metaId", response.body.id); %}
+
+### 4. Consultar la meta recién creada
+GET http://localhost:8080/api/metas/{{metaId}}
+Accept: application/json
+
+### 5. Añadir un aporte a la meta (actualiza el ahorrado y crea movimiento)
+POST http://localhost:8080/api/metas/{{metaId}}/aportes
+Content-Type: application/json
+Accept: application/json
+
+{
+  "valor": 50000,
+  "concepto": "Ahorro semanal",
+  "fecha": "2026-10-27"
+}
+
+### 6. Registrar un ingreso
+POST http://localhost:8080/api/movimientos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "concepto": "Pago semanal",
+  "tipo": "INGRESO",
+  "valor": 150000,
+  "fecha": "2026-10-27"
+}
+> {% client.global.set("movimientoId", response.body.id); %}
+
+### 7. Registrar un gasto
+POST http://localhost:8080/api/movimientos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "concepto": "Transporte",
+  "tipo": "GASTO",
+  "valor": 12000,
+  "fecha": "2026-10-27"
+}
+
+### 8. Listar todos los movimientos
+GET http://localhost:8080/api/movimientos
+Accept: application/json
+
+### 9. Consultar el movimiento registrado en el paso 6
+GET http://localhost:8080/api/movimientos/{{movimientoId}}
+Accept: application/json
+
+### 10. Consultar resumen financiero
+GET http://localhost:8080/api/resumen
+Accept: application/json
+
+### 11. Actualizar la meta (opcional)
+PUT http://localhost:8080/api/metas/{{metaId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nombre": "Comprar una moto",
+  "objetivo": 3000000,
+  "ahorrado": 0,
+  "descripcion": "Objetivo actualizado desde IntelliJ",
+  "fechaObjetivo": "2027-12-31"
+}
+
+### 12. Eliminar el movimiento del paso 6 (opcional)
+DELETE http://localhost:8080/api/movimientos/{{movimientoId}}
+
+### 13. Eliminar la meta creada (opcional; ejecutar al final)
+DELETE http://localhost:8080/api/metas/{{metaId}}

@@ -1,0 +1,23 @@
+AHORRA JOVEN — PROYECTO PARA ENTREGA
+====================================
+
+1. Extrae todo el ZIP.
+2. Instala Java JDK 17 o superior.
+3. Abre IntelliJ IDEA > File > Open y selecciona la carpeta demo-arreglado/demo (contiene pom.xml).
+4. Espera a que Maven descargue las dependencias.
+5. Abre src/main/java/com/example/demo/DemoApplication.java y ejecuta el main con el triángulo verde.
+6. Abre requests.http y prueba las solicitudes desde IntelliJ con Run. No necesitas Postman.
+
+PARA PUBLICAR EN GITHUB
+- Lee demo-arreglado/README.md, sección “Publicar en GitHub”.
+- Crea un repositorio vacío en GitHub y ejecuta los comandos allí indicados desde la terminal de IntelliJ.
+
+FUNCIONES DE LA API
+- Controlador REST de metas y movimientos.
+- Repositorios Spring Data JPA.
+- Base de datos H2 local.
+- Resumen financiero y validación de datos.
+- Archivo requests.http para probar la API dentro de IntelliJ IDEA.
+
+La primera ejecución requiere internet para descargar dependencias Maven. No se requiere Postman.
+Es un proyecto educativo, no conectado a bancos ni pagos reales.

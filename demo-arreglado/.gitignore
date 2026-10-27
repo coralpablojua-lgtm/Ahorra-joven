@@ -1,0 +1,8 @@
+# Java / Maven
+demo/target/
+demo/data/
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

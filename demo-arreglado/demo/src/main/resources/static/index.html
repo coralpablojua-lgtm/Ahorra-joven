@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102a43">
+<title>Ahorra Joven | Tu dinero, tus metas</title>
+<style>
+:root{--navy:#102a43;--navy2:#243b53;--green:#25b887;--mint:#e7faf3;--bg:#f4f7fb;--text:#172b4d;--muted:#6b7c93;--line:#e5ebf2;--red:#e05b67;--yellow:#f3b744}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+.layout{min-height:100vh;display:grid;grid-template-columns:240px 1fr}
+.sidebar{background:var(--navy);color:#fff;padding:28px 18px;display:flex;flex-direction:column;gap:28px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:-.5px;padding:0 10px}
+.logo{width:39px;height:39px;background:var(--green);border-radius:13px;display:grid;place-items:center;font-size:23px}
+.tagline{color:#a9bdce;font-size:12px;margin:5px 10px 0}
+.nav{display:grid;gap:8px}.nav button{color:#c7d5e1;background:transparent;text-align:left;padding:13px 14px;border-radius:12px;display:flex;gap:12px;align-items:center}
+.nav button.active,.nav button:hover{background:#29475f;color:white}.nav .ico{font-size:18px;width:23px;text-align:center}
+.side-tip{margin-top:auto;background:#1d3b53;border:1px solid #35556d;padding:17px;border-radius:16px;color:#d6e4ed;font-size:13px;line-height:1.5}
+.side-tip b{display:block;color:#fff;margin-bottom:6px}
+main{padding:32px clamp(18px,4vw,48px);min-width:0;max-width:1500px;width:100%;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}
+.eyebrow{color:var(--green);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.3px}
+h1{font-size:clamp(25px,3vw,34px);letter-spacing:-1px;margin:6px 0 7px;color:var(--navy)}
+.subtitle{color:var(--muted);margin:0;font-size:14px}
+.profile{display:flex;align-items:center;gap:10px;background:#fff;padding:8px 13px 8px 8px;border:1px solid var(--line);border-radius:14px;white-space:nowrap}
+.avatar{background:#d7f7eb;color:#087e5b;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;font-weight:800}
+.profile small{display:block;color:var(--muted);margin-top:2px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 5px 18px #17324d08;min-width:0}
+.metric-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;gap:10px}
+.metric-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;background:var(--mint)}
+.metric-value{font-size:clamp(23px,2.6vw,32px);font-weight:800;letter-spacing:-1px;margin:16px 0 5px;color:var(--navy);overflow-wrap:anywhere}
+.metric-foot{font-size:12px;color:var(--muted)}.green{color:#10966c;font-weight:700}
+.grid-main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:18px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+h2{font-size:17px;margin:0;color:var(--navy)}.muted{color:var(--muted);font-size:13px}
+.btn{background:var(--green);color:#063b2d;font-weight:800;border-radius:11px;padding:11px 15px;transition:.15s}
+.btn:hover{filter:brightness(.96);transform:translateY(-1px)}.btn.dark{background:var(--navy);color:white}.btn.light{background:#edf3f7;color:var(--navy)}.btn.danger{background:#fff0f1;color:#b52e3a}.btn.small{padding:8px 10px;font-size:12px}
+.goal-list{display:grid;gap:14px}.goal{border:1px solid var(--line);border-radius:15px;padding:16px}
+.goal-top{display:flex;align-items:flex-start;gap:12px}.goal-emoji{height:44px;width:44px;border-radius:13px;background:#eef8f5;display:grid;place-items:center;font-size:23px;flex-shrink:0}
+.goal-info{flex:1;min-width:0}.goal-title{font-weight:800;margin:2px 0 5px}.goal-note{color:var(--muted);font-size:12px}
+.goal-percent{font-weight:800;color:#108c68}.bar{height:8px;background:#edf1f5;border-radius:20px;overflow:hidden;margin:15px 0 9px}.bar span{display:block;height:100%;background:var(--green);border-radius:20px}
+.goal-bottom{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.goal-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.activity{display:grid;gap:0}.transaction{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.transaction:last-child{border-bottom:0}
+.tx-icon{width:40px;height:40px;border-radius:13px;background:#eef4f8;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.tx-info{flex:1;min-width:0}.tx-title{font-size:13px;font-weight:750;overflow-wrap:anywhere}.tx-date{font-size:11px;color:var(--muted);margin-top:4px}
+.tx-amount{font-size:13px;font-weight:800;white-space:nowrap}.income{color:#10966c}.expense{color:var(--red)}
+.empty{text-align:center;padding:28px 10px;color:var(--muted);font-size:13px}
+.quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.page{display:none}.page.active{display:block}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted);font-weight:700}
+.field input,.field select{width:100%;padding:12px 13px;border:1px solid #dce5ed;border-radius:11px;background:white;color:var(--text);outline:none}
+.field input:focus,.field select:focus{border-color:var(--green);box-shadow:0 0 0 3px #25b88720}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.table-wrap{overflow:auto}.tx-table{width:100%;border-collapse:collapse;font-size:13px}.tx-table th,.tx-table td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);white-space:nowrap}.tx-table th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.toast{position:fixed;right:22px;bottom:22px;background:var(--navy);color:#fff;padding:14px 18px;border-radius:12px;box-shadow:0 12px 30px #102a4333;display:none;z-index:5;font-size:14px;max-width:calc(100vw - 44px)}
+.modal-backdrop{position:fixed;inset:0;background:#102a4380;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
+.modal{background:white;border-radius:20px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto;box-shadow:0 20px 70px #102a4340}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.close{background:#eef3f7;border-radius:9px;width:34px;height:34px;font-size:20px}
+.notice{background:#fff9e8;border:1px solid #f7e5ad;color:#785817;padding:12px 14px;border-radius:12px;font-size:12px;line-height:1.5;margin-top:16px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{padding:14px 16px;gap:12px}.brand{padding:0}.tagline,.side-tip{display:none}.nav{display:flex;overflow-x:auto;gap:5px}.nav button{white-space:nowrap;padding:10px 12px}.grid-main{grid-template-columns:1fr}.cards{gap:10px}.card{padding:16px}}
+@media(max-width:600px){main{padding:22px 14px}.topbar{align-items:flex-start}.profile{padding:6px}.profile .name{display:none}.cards{grid-template-columns:1fr}.cards .card{padding:17px}.metric-value{margin:10px 0 4px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar .subtitle{max-width:260px}.goal-bottom{align-items:flex-start}.nav button{font-size:12px}.section-head{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div><div class="brand"><span class="logo">↗</span><span>Ahorra Joven</span></div><p class="tagline">Pequeños pasos, grandes metas</p></div>
+  <nav class="nav" aria-label="Navegación">
+    <button class="active" data-page="inicio"><span class="ico">⌂</span> Resumen</button>
+    <button data-page="metas"><span class="ico">◎</span> Mis metas</button>
+    <button data-page="movimientos"><span class="ico">⇄</span> Movimientos</button>
+  </nav>
+  <div class="side-tip"><b>💡 Consejo de hoy</b>Ahorrar un poquito cada semana puede acercarte más rápido a eso que quieres. ¡La constancia gana!</div>
+</aside>
+<main>
+  <header class="topbar">
+    <div><div class="eyebrow">Tu futuro empieza hoy</div><h1 id="pageTitle">¡Hola! Vamos a ahorrar 👋</h1><p class="subtitle" id="pageSubtitle">Organiza tu dinero y convierte tus planes en metas.</p></div>
+    <div class="profile"><div class="avatar" id="avatar">AJ</div><div class="name"><strong id="userName">Mi cuenta</strong><small>Ahorrador/a</small></div></div>
+  </header>
+
+  <section class="page active" id="page-inicio">
+    <div class="cards">
+      <article class="card"><div class="metric-head">Dinero disponible <span class="metric-icon">💵</span></div><div class="metric-value" id="balance">$0</div><div class="metric-foot">Ingresos menos gastos registrados</div></article>
+      <article class="card"><div class="metric-head">Total ahorrado <span class="metric-icon">🐷</span></div><div class="metric-value" id="saved">$0</div><div class="metric-foot"><span class="green" id="goalCount">0 metas</span> en marcha</div></article>
+      <article class="card"><div class="metric-head">Este mes <span class="metric-icon">📈</span></div><div class="metric-value" id="monthSaved">$0</div><div class="metric-foot">Balance de movimientos del mes</div></article>
+    </div>
+    <div class="grid-main">
+      <section class="card"><div class="section-head"><div><h2>Mis metas de ahorro</h2><div class="muted" style="margin-top:5px">Cada peso te acerca a tu objetivo</div></div><button class="btn small" onclick="openGoalModal()">+ Nueva meta</button></div><div class="goal-list" id="homeGoals"></div><div class="quick-actions"><button class="btn" onclick="openTxModal('ingreso')">＋ Registrar ingreso</button><button class="btn light" onclick="openTxModal('gasto')">− Registrar gasto</button></div></section>
+      <section class="card"><div class="section-head"><div><h2>Actividad reciente</h2><div class="muted" style="margin-top:5px">Tus últimos movimientos</div></div><button class="btn small light" onclick="showPage('movimientos')">Ver todos</button></div><div class="activity" id="recentTx"></div></section>
+    </div>
+    <div class="notice">Demo educativa: los datos se guardan en este navegador. No conectes cuentas bancarias ni registres contraseñas reales.</div>
+  </section>
+
+  <section class="page" id="page-metas">
+    <section class="card"><div class="section-head"><div><h2>Todas mis metas</h2><div class="muted" style="margin-top:5px">Crea un objetivo y registra cuánto vas guardando.</div></div><button class="btn" onclick="openGoalModal()">＋ Crear meta</button></div><div class="goal-list" id="allGoals"></div></section>
+  </section>
+
+  <section class="page" id="page-movimientos">
+    <section class="card"><div class="section-head"><div><h2>Mis movimientos</h2><div class="muted" style="margin-top:5px">Controla lo que recibes y lo que gastas.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" onclick="openTxModal('ingreso')">＋ Ingreso</button><button class="btn small light" onclick="openTxModal('gasto')">− Gasto</button></div></div><div class="table-wrap"><table class="tx-table"><thead><tr><th>Movimiento</th><th>Tipo</th><th>Fecha</th><th>Valor</th><th></th></tr></thead><tbody id="txRows"></tbody></table></div></section>
+  </section>
+</main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Nueva meta</h2><button class="close" onclick="closeModal()" aria-label="Cerrar">×</button></div><div id="modalBody"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const KEY='ahorraJovenDataV1';
+const money=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(Number(n)||0);
+const today=()=>new Date().toISOString().slice(0,10);
+let data={name:'Mi cuenta',goals:[],transactions:[]};
+function load(){try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&Array.isArray(saved.goals)&&Array.isArray(saved.transactions))data=saved;}catch(e){}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));render();}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',2600);}
+function totalIncome(){return data.transactions.filter(t=>t.type==='ingreso').reduce((s,t)=>s+t.amount,0)}
+function totalExpense(){return data.transactions.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0)}
+function totalSaved(){return data.goals.reduce((s,g)=>s+g.saved,0)}
+function render(){
+ document.getElementById('userName').textContent=data.name||'Mi cuenta';
+ document.getElementById('avatar').textContent=(data.name||'AJ').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase();
+ document.getElementById('balance').textContent=money(totalIncome()-totalExpense());
+ document.getElementById('saved').textContent=money(totalSaved());
+ document.getElementById('goalCount').textContent=data.goals.length+' '+(data.goals.length===1?'meta':'metas');
+ const month=new Date().toISOString().slice(0,7);
+ document.getElementById('monthSaved').textContent=money(data.transactions.filter(t=>t.date.slice(0,7)===month).reduce((s,t)=>s+(t.type==='ingreso'?t.amount:-t.amount),0));
+ document.getElementById('homeGoals').innerHTML=goalMarkup(data.goals.slice(0,3));
+ document.getElementById('allGoals').innerHTML=goalMarkup(data.goals);
+ const recent=[...data.transactions].sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created).slice(0,5);
+ document.getElementById('recentTx').innerHTML=recent.length?recent.map(txMarkup).join(''):'<div class="empty">Todavía no tienes movimientos.<br>Registra tu primer ingreso o gasto.</div>';
+ const all=[...data.transactions].sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);
+ document.getElementById('txRows').innerHTML=all.length?all.map(t=>`<tr><td>${escapeHtml(t.title)}</td><td><span class="${t.type==='ingreso'?'income':'expense'}">${t.type==='ingreso'?'Ingreso':'Gasto'}</span></td><td>${escapeHtml(t.date)}</td><td class="${t.type==='ingreso'?'income':'expense'}">${t.type==='ingreso'?'+':'−'}${money(t.amount)}</td><td><button class="btn small danger" onclick="deleteTx('${t.id}')">Eliminar</button></td></tr>`).join(''):'<tr><td colspan="5"><div class="empty">Aún no hay movimientos registrados.</div></td></tr>';
+}
+function goalMarkup(goals){if(!goals.length)return '<div class="empty">Aún no tienes metas creadas.<br>¡Crea la primera y empieza a ahorrar!</div>';return goals.map(g=>{const pct=Math.min(100,Math.round(g.saved/g.target*100));return `<article class="goal"><div class="goal-top"><div class="goal-emoji">${escapeHtml(g.emoji||'🎯')}</div><div class="goal-info"><div class="goal-title">${escapeHtml(g.name)}</div><div class="goal-note">${g.date?'Meta para el '+escapeHtml(g.date):'Tu objetivo de ahorro'}</div></div><div class="goal-percent">${pct}%</div></div><div class="bar"><span style="width:${pct}%"></span></div><div class="goal-bottom"><span><b style="color:var(--navy)">${money(g.saved)}</b> ahorrados</span><span>Objetivo: ${money(g.target)}</span></div><div class="goal-actions"><button class="btn small" onclick="openDepositModal('${g.id}')">＋ Añadir ahorro</button><button class="btn small light" onclick="editGoal('${g.id}')">Editar</button><button class="btn small danger" onclick="deleteGoal('${g.id}')">Eliminar</button></div></article>`}).join('')}
+function txMarkup(t){return `<div class="transaction"><div class="tx-icon">${t.type==='ingreso'?'↙️':'↗️'}</div><div class="tx-info"><div class="tx-title">${escapeHtml(t.title)}</div><div class="tx-date">${escapeHtml(t.date)} · ${t.type==='ingreso'?'Ingreso':'Gasto'}</div></div><div class="tx-amount ${t.type==='ingreso'?'income':'expense'}">${t.type==='ingreso'?'+':'−'}${money(t.amount)}</div></div>`}
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const titles={inicio:['¡Hola! Vamos a ahorrar 👋','Organiza tu dinero y convierte tus planes en metas.'],metas:['Mis metas de ahorro 🎯','Define tus objetivos y avanza a tu propio ritmo.'],movimientos:['Mis movimientos 💳','Cada registro te ayuda a entender mejor tu dinero.']};document.getElementById('pageTitle').textContent=titles[page][0];document.getElementById('pageSubtitle').textContent=titles[page][1];}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function openModal(title,html){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=html;document.getElementById('modalBackdrop').style.display='flex';}
+function closeModal(){document.getElementById('modalBackdrop').style.display='none'}
+document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});
+function openGoalModal(id=null){const g=id?data.goals.find(x=>x.id===id):null;openModal(g?'Editar meta':'Crear una meta',`<form id="goalForm"><div class="form-grid"><div class="field full"><label for="goalName">¿Para qué estás ahorrando?</label><input id="goalName" required maxlength="60" placeholder="Ej. Mi primera moto" value="${escapeHtml(g?.name||'')}"></div><div class="field"><label for="goalTarget">Objetivo (COP)</label><input id="goalTarget" type="number" min="1000" step="1000" required placeholder="500000" value="${g?.target||''}"></div><div class="field"><label for="goalEmoji">Icono</label><select id="goalEmoji"><option value="🎯">🎯 Meta personal</option><option value="📱">📱 Tecnología</option><option value="🏍️">🏍️ Moto</option><option value="🎓">🎓 Estudios</option><option value="✈️">✈️ Viaje</option><option value="💻">💻 Computador</option><option value="👟">👟 Ropa / deporte</option><option value="🛟">🛟 Fondo de emergencia</option></select></div><div class="field full"><label for="goalDate">Fecha objetivo (opcional)</label><input id="goalDate" type="date" min="${today()}" value="${g?.date||''}"></div></div><div class="form-actions"><button type="button" class="btn light" onclick="closeModal()">Cancelar</button><button class="btn" type="submit">Guardar meta</button></div></form>`);
+ if(g)document.getElementById('goalEmoji').value=g.emoji||'🎯';
+ document.getElementById('goalForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('goalName').value.trim(),target=Number(document.getElementById('goalTarget').value);if(!name||target<1000){toast('Escribe un nombre y un objetivo de al menos $1.000.');return;}const item={id:g?.id||crypto.randomUUID(),name,target,saved:g?.saved||0,emoji:document.getElementById('goalEmoji').value,date:document.getElementById('goalDate').value};if(g)data.goals=data.goals.map(x=>x.id===g.id?item:x);else data.goals.unshift(item);closeModal();persist();toast(g?'Meta actualizada':'¡Meta creada!');});
+}
+function editGoal(id){openGoalModal(id)}
+function deleteGoal(id){const g=data.goals.find(x=>x.id===id);if(g&&confirm(`¿Eliminar la meta "${g.name}"? Esta acción no se puede deshacer.`)){data.goals=data.goals.filter(x=>x.id!==id);persist();toast('Meta eliminada.');}}
+function openDepositModal(id){const g=data.goals.find(x=>x.id===id);if(!g)return;openModal('Añadir ahorro',`<p class="muted">Meta: <b>${escapeHtml(g.name)}</b> · Llevas ${money(g.saved)} de ${money(g.target)}</p><form id="depositForm"><div class="field"><label for="depositAmount">¿Cuánto vas a guardar? (COP)</label><input id="depositAmount" type="number" min="1000" step="1000" required placeholder="20000"></div><div class="form-actions"><button type="button" class="btn light" onclick="closeModal()">Cancelar</button><button class="btn" type="submit">Añadir ahorro</button></div></form>`);
+ document.getElementById('depositForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number(document.getElementById('depositAmount').value);if(amount<1000){toast('El ahorro mínimo es de $1.000.');return;}g.saved+=amount;data.transactions.unshift({id:crypto.randomUUID(),title:'Ahorro: '+g.name,type:'ingreso',amount,date:today(),created:Date.now()});closeModal();persist();toast('¡Buen trabajo! Ahorro añadido.');});
+}
+function openTxModal(type){const ingreso=type==='ingreso';openModal(ingreso?'Registrar ingreso':'Registrar gasto',`<form id="txForm"><div class="form-grid"><div class="field full"><label for="txTitle">Concepto</label><input id="txTitle" required maxlength="70" placeholder="${ingreso?'Ej. Pago semanal':'Ej. Transporte'}"></div><div class="field"><label for="txAmount">Valor (COP)</label><input id="txAmount" type="number" min="1" step="100" required placeholder="50000"></div><div class="field"><label for="txDate">Fecha</label><input id="txDate" type="date" required value="${today()}" max="${today()}"></div></div><div class="form-actions"><button type="button" class="btn light" onclick="closeModal()">Cancelar</button><button class="btn" type="submit">Guardar ${ingreso?'ingreso':'gasto'}</button></div></form>`);
+ document.getElementById('txForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number(document.getElementById('txAmount').value),title=document.getElementById('txTitle').value.trim(),date=document.getElementById('txDate').value;if(!title||amount<=0||!date){toast('Revisa los datos del movimiento.');return;}data.transactions.unshift({id:crypto.randomUUID(),title,type,amount,date,created:Date.now()});closeModal();persist();toast(ingreso?'Ingreso registrado.':'Gasto registrado.');});
+}
+function deleteTx(id){if(confirm('¿Eliminar este movimiento?')){data.transactions=data.transactions.filter(t=>t.id!==id);persist();toast('Movimiento eliminado.');}}
+load();render();
+fetch('/api/estado').then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(d.estado!=='funcionando')toast('Revisa el estado del servidor.');}).catch(()=>toast('No se pudo comprobar el servidor. Recarga la página si algo no funciona.'));
+</script>
+</body>
+</html>
